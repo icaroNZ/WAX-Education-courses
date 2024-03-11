@@ -1,0 +1,6 @@
+{
+    "name": "WAX Development",
+    "dockerFile": "Dockerfile",
+    "forwardPorts": [3000, 8000, 8888,9876],
+    "remoteUser": "root"
+}
