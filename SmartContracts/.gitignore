@@ -1,0 +1,54 @@
+# Dependency directories
+node_modules/
+build/
+
+# Compiled contract files
+*.wasm
+*.abi
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor folders
+# .vscode/ - Will keep for the tasks.json file
+.idea/
+*.swp
+*.swo
+
+# Log files in any directory
+*.log
+
+# Operating System generated files
+.DS_Store
+Thumbs.db
+
+# React build artifacts
+/public/build/
+/build/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Debug log from npm
+npm-debug.log*
+
+# Package lock files
+package-lock.json
+yarn.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history

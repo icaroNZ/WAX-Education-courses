@@ -15,8 +15,8 @@ RUN apt-get install -y \
     libgcc1 \
     libssl1.1 \
     libstdc++6 \
-    libinfo5 \
-    zlibg \
+    libtinfo5 \
+    zlib1g \
     libusb-1.0-0 \
     libcurl3-gnutls \
     libpq5
@@ -27,7 +27,7 @@ RUN apt-get install -y ./eosio_2.1.0-1-ubuntu-18.04_amd64.deb || apt-get -f inst
 
 
 RUN wget https://github.com/eosio/eosio.cdt/releases/download/v1.8.0/eosio.cdt_1.8.0-1-ubuntu-18.04_amd64.deb
-RUN apt-get -y install ./eosio.cdt_1.8.0-1-ubuntu-18.04_amd64.deb || apt-get -f install
+RUN apt-get install -y ./eosio.cdt_1.8.0-1-ubuntu-18.04_amd64.deb || apt-get -f install
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /eosio_2.1.0-1-ubuntu-18.04_amd64.deb /eosio.cdt_1.8.0-1-ubuntu-18.04_amd64.deb
