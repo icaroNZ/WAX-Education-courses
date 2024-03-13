@@ -9,19 +9,34 @@ nodeos -e -p eosio \
 --http-validate-host=false \
 --verbose-http-errors >> nodeos.log 2>&1 &
 ```
-# Create wallet
+
+# Wallet Commands
+
+## Create Wallet
 ```bash
 cleos wallet create --to-console
 ```
-PW5K5VyLzPrRzp9mi3XpJ5dhyuu2DuLLxR9BFjvirAV9SbRvnWw5P
+Private Key
 ```bash
-cleos wallet create -n p2ewgametken --to-console
+PW5JHQ8SbuSBuDfWJFs5ZsHNum2JnHVguzASF8trW87DJfEp4HdAc
 ```
-Wallet name: p2ewgametken
-PW5JEBddUYHHQLjCrCq5QiAAteJbeu9f8o8zWvVEeXomaRVnjW3eT
+Owner Key:
+```bash
+EOS6eKVqVbrzp5CC3cY1hwTqHD5Z893YMDzz5ak2uSQegvbkTq3vK
+```
+## List, lock and unlock wallet
+```bash
+cleos wallet list
+cleos wallet lock
+cleos wallet unlock
+```
 
-# Import eosio private key
+## Import Private Key
 ```bash
-cleos wallet import
+cleos wallet import --private-key PW5JHQ8SbuSBuDfWJFs5ZsHNum2JnHVguzASF8trW87DJfEp4HdAc
 ```
-EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+
+## Create Account
+```bash
+cleos create account eosio eosio.token EOS6eKVqVbrzp5CC3cY1hwTqHD5Z893YMDzz5ak2uSQegvbkTq3vK
+```
