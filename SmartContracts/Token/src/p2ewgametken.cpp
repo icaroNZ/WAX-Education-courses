@@ -1,4 +1,4 @@
-#include <eosio.token/eosio.token.hpp>
+#include <p2ewgametken.hpp>
 
 namespace eosio {
 
