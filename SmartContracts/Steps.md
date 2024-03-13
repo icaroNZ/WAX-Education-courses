@@ -38,5 +38,5 @@ cleos wallet import --private-key PW5JHQ8SbuSBuDfWJFs5ZsHNum2JnHVguzASF8trW87DJf
 
 ## Create Account
 ```bash
-cleos create account eosio eosio.token EOS6eKVqVbrzp5CC3cY1hwTqHD5Z893YMDzz5ak2uSQegvbkTq3vK
+cleos create account eosio p2ewgametken EOS6eKVqVbrzp5CC3cY1hwTqHD5Z893YMDzz5ak2uSQegvbkTq3vK
 ```
