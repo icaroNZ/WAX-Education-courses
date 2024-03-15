@@ -35,7 +35,10 @@ cleos wallet unlock
 ```bash
 cleos wallet import --private-key PW5JHQ8SbuSBuDfWJFs5ZsHNum2JnHVguzASF8trW87DJfEp4HdAc
 ```
-
+## Create Keys
+```bash
+cleos wallet create_key
+```
 ## Create Account
 ```bash
 cleos create account eosio p2ewgametken EOS6eKVqVbrzp5CC3cY1hwTqHD5Z893YMDzz5ak2uSQegvbkTq3vK
@@ -67,4 +70,11 @@ cleos get table p2ewgametken p2ewgametken accounts
 cleos get table p2ewgametken GOLD stat
 cleos get table p2ewgametken WOOD stat
 cleos get table p2ewgametken FOOD stat
+```
+
+## Accounts wallet Private key
+```bash
+PW5HpuncN2BfzUcRi1PdS32nWi3FuwsvSsNVc2WCLnGmvCNNdtKj1
+acc1: EOS8KV5GTiR3Y9G3MEadt2tSjRxDx9BQZ1ZeP4NEAbaWUx3NrrCo1
+acc2: EOS5EvHLysBkGiLh7Fc1jqGL7wFZdjSgG1SChUxFizhEUkX82wGHp
 ```
