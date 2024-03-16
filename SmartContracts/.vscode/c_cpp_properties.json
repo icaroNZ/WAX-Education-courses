@@ -3,15 +3,27 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
+                "/workspaces/WAX-Education-courses/SmartContracts/**",
                 "/usr/opt/eosio.cdt/1.8.0/**",
-                "/usr/opt/eosio.cdt/1.8.0/include/**"
+                "/usr/opt/eosio.cdt/1.8.0/include/**",
+                "${workspaceFolder}/Game/p2ewgamelogi/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang-8",
             "cStandard": "c17",
             "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-x64"
+            "intelliSenseMode": "linux-clang-x64",
+            "compilerPathInCppPropertiesJson": "/usr/bin/clang-8",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "/workspaces/WAX-Education-courses/SmartContracts/**",
+                    "/usr/opt/eosio.cdt/1.8.0/**",
+                    "/usr/opt/eosio.cdt/1.8.0/include/**",
+                    "/workspaces/WAX-Education-courses/SmartContracts"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4
