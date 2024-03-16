@@ -78,3 +78,20 @@ PW5HpuncN2BfzUcRi1PdS32nWi3FuwsvSsNVc2WCLnGmvCNNdtKj1
 acc1: EOS8KV5GTiR3Y9G3MEadt2tSjRxDx9BQZ1ZeP4NEAbaWUx3NrrCo1
 acc2: EOS5EvHLysBkGiLh7Fc1jqGL7wFZdjSgG1SChUxFizhEUkX82wGHp
 ```
+
+## Transfer Tokens
+```bash
+cleos push action p2ewgametken transfer '["p2ewgametken", "acc1", "100.0000 GOLD", "memo"]' -p p2ewgametken@active
+cleos push action p2ewgametken transfer '["p2ewgametken", "acc2", "100.0000 WOOD", "memo"]' -p p2ewgametken@active
+```
+
+## Check tables
+```bash
+cleos get table p2ewgametken acc1 accounts
+```
+
+## Check balance
+```bash
+cleos get currency balance p2ewgametken acc1 GOLD
+cleos get currency balance p2ewgametken acc2
+```
