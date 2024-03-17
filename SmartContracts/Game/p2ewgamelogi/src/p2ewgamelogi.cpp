@@ -45,3 +45,22 @@ void p2ewgamelogi::on_transfer(name from, name to, asset quantity, string memo){
       }
    });
 }
+
+ACTION p2ewgamelogi::withdraw ( name wallet, asset quantity ){
+   require_auth(wallet);
+   check(quantity.amount > 0, "Invalid amount");
+   symbol gold_symbol("GOLD", 4), wood_symbal("WOOD", 4), food_symbal("FOOD", 4);
+   symbol asset_symbol = quantity.symbol;
+   check(asset_symbol == gold_symbol || asset_symbol == wood_symbal || asset_symbol == food_symbal, 
+         "Unsupported token"
+   );
+   accounts_table accounts(get_self(), get_self().value);
+   auto acc = accounts.find(wallet.value);
+   check(acc != accounts.end(), "Account not found");
+   auto token = std::find_if(acc->balance.begin(), acc->balance.end(), [&](const auto& b){
+      return b.symbol == asset_symbol;
+   });
+   check(token != acc->balance.end(), "Balance not founf");
+   check(token->amount >= quantity.amount, "Insufiente balance");
+   
+}
