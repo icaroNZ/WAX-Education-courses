@@ -10,6 +10,31 @@ nodeos -e -p eosio \
 --verbose-http-errors >> nodeos.log 2>&1 &
 ```
 
+### Replay in case of Database dirty flag set
+```bash
+nodeos -e -p eosio \
+--plugin eosio::producer_plugin \
+--plugin eosio::chain_api_plugin \
+--plugin eosio::http_plugin \
+--access-control-allow-origin='*' \
+--contracts-console \
+--http-validate-host=false \
+--replay-blockchain \
+--verbose-http-errors >> nodeos.log 2>&1 &
+```
+OR
+```bash
+nodeos -e -p eosio \
+--plugin eosio::producer_plugin \
+--plugin eosio::chain_api_plugin \
+--plugin eosio::http_plugin \
+--access-control-allow-origin='*' \
+--contracts-console \
+--http-validate-host=false \
+--hard-replay-blockchain \
+--verbose-http-errors >> nodeos.log 2>&1 &
+```
+
 # Wallet Commands
 
 ## Create Wallet
