@@ -9,6 +9,10 @@ CONTRACT p2ewgamelogi : public contract {
 
       ACTION hi( name nm );
       ACTION addaccount( name wallet);
+      
+      [[eosio::on_notify("p2ewgametken::transfer")]]
+      void on_transfer(name from, name to, asset quantity, string memo);
+
       using hi_action = action_wrapper<"hi"_n, &p2ewgamelogi::hi>;
    
    private:

@@ -18,3 +18,30 @@ ACTION p2ewgamelogi::addaccount( name wallet ){
       newacc.wallet = wallet;
    });
 }
+
+void p2ewgamelogi::on_transfer(name from, name to, asset quantity, string memo){
+   if(to != get_self() || from == get_self()){
+      return;
+   }
+   check(quantity.amount > 0, "Invalid amount");
+   symbol gold_symbol("GOLD", 4), wood_symbal("WOOD", 4), food_symbal("FOOD", 4);
+   symbol asset_symbol = quantity.symbol;
+   check(asset_symbol == gold_symbol || asset_symbol == wood_symbal || asset_symbol == food_symbal, 
+         "Unsupported token"
+   );
+   accounts_table accounts(get_self(), get_self().value);
+   auto user_account = accounts.find(from.value);
+   check(user_account != accounts.end(), "User does not exist");
+
+   accounts.modify(user_account, get_self(), [&](auto& acc){
+      auto token = std::find_if(acc.balance.begin(), acc.balance.end(), [&](const asset& a){
+         return a.symbol == asset_symbol;
+      });
+
+      if (token != acc.balance.end()){
+         *token += quantity;
+      } else {
+         acc.balance.push_back(quantity);
+      }
+   });
+}
