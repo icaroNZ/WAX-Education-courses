@@ -52,9 +52,7 @@ ACTION p2ewgamelogi::withdraw ( name wallet, asset quantity ){
    symbol gold_symbol("GOLD", 4), wood_symbal("WOOD", 4), food_symbal("FOOD", 4);
    symbol asset_symbol = quantity.symbol;
    check(asset_symbol == gold_symbol || asset_symbol == wood_symbal || asset_symbol == food_symbal, 
-         "Unsupported token"
-
-         
+         "Unsupported token"       
    );
    accounts_table accounts(get_self(), get_self().value);
    auto acc = accounts.find(wallet.value);
@@ -64,5 +62,11 @@ ACTION p2ewgamelogi::withdraw ( name wallet, asset quantity ){
    });
    check(token != acc->balance.end(), "Balance not found");
    check(token->amount >= quantity.amount, "Insufiente balance");
-
+   accounts.modify(acc, get_self(), [&](auto& user_account){
+      auto& balance = *token;
+      balance.amount -= quantity.amount;
+      if(balance.amount == 0){
+         user_account.balance.erase(token);
+      }
+   });
 }
