@@ -57,16 +57,21 @@ ACTION p2ewgamelogi::withdraw ( name wallet, asset quantity ){
    accounts_table accounts(get_self(), get_self().value);
    auto acc = accounts.find(wallet.value);
    check(acc != accounts.end(), "Account not found");
-   auto token = std::find_if(acc->balance.begin(), acc->balance.end(), [&](const auto& b){
+   auto token = std::find_if(acc->balance.begin(), acc->balance.end(), [&]( auto& b){
       return b.symbol == asset_symbol;
    });
    check(token != acc->balance.end(), "Balance not found");
    check(token->amount >= quantity.amount, "Insufiente balance");
    accounts.modify(acc, get_self(), [&](auto& user_account){
-      auto& balance = *token;
-      balance.amount -= quantity.amount;
-      if(balance.amount == 0){
-         user_account.balance.erase(token);
+      for(size_t i = 0; i < user_account.balance.size(); i++){
+         if(user_account.balance[i].symbol == quantity.symbol){
+            user_account.balance[i].amount -= quantity.amount;
+            if(user_account.balance[i].amount == 0){
+               user_account.balance.erase(user_account.balance.begin() + i);
+            }
+            return;
+         }
       }
+      check(false, "Could not update token");
    });
-}
+}c
