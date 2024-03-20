@@ -160,6 +160,7 @@ ACTION p2ewgamelogi::claimtool( name wallet, uint64_t asset_id){
    change_energy(user_account_it, energy_consumed);
    int16_t durability_consumed = -static_cast<int16_t>(tool_it->durability_consumed);
    change_tool_durability(user_tool_it, durability_consumed);
+   change_balance(user_account_it, tool_it->reward);
 }
 
 void p2ewgamelogi::change_energy(accounts_table::const_iterator user_account_it, int16_t amount){
@@ -175,6 +176,31 @@ void p2ewgamelogi::change_tool_durability(user_tool_table::const_iterator user_t
       tool.current_durability += amount;
    });
 }
+
+void p2ewgamelogi::change_balance(accounts_table::const_iterator user_account_it, asset amount){
+   accounts_table accounts(get_self(), get_self().value);
+   accounts.modify(user_account_it, get_self(), [&](auto& acc){
+      for(auto& balance : acc.balance){
+         if(balance.symbol == amount.symbol){
+            balance.amount += amount.amount;
+            return;
+         }
+      };
+      acc.balance.push_back(amount);
+   });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
