@@ -10,8 +10,6 @@ ACTION p2ewgamelogi::addaccount(name wallet)
 {
    require_auth(wallet);
 
-   accounts_table accounts(get_self(), get_self().value);
-
    auto newaccount = accounts.find(wallet.value);
 
    check(newaccount == accounts.end(), "Account already exist");
@@ -31,7 +29,6 @@ void p2ewgamelogi::on_transfer(name from, name to, asset quantity, string memo)
    symbol asset_symbol = quantity.symbol;
    check(asset_symbol == gold_symbol || asset_symbol == wood_symbal || asset_symbol == food_symbal,
          "Unsupported token");
-   accounts_table accounts(get_self(), get_self().value);
    auto user_account = accounts.find(from.value);
    check(user_account != accounts.end(), "User does not exist");
 
@@ -56,7 +53,6 @@ ACTION p2ewgamelogi::withdraw(name wallet, asset quantity)
    symbol asset_symbol = quantity.symbol;
    check(asset_symbol == gold_symbol || asset_symbol == wood_symbal || asset_symbol == food_symbal,
          "Unsupported token");
-   accounts_table accounts(get_self(), get_self().value);
    auto acc = accounts.find(wallet.value);
    check(acc != accounts.end(), "Account not found");
    auto token = std::find_if(acc->balance.begin(), acc->balance.end(), [&](auto &b)
@@ -104,7 +100,6 @@ ACTION p2ewgamelogi::addtool(
 {
    require_auth(get_self());
 
-   tools_table tools(get_self(), get_self().value);
    auto tool_it = tools.find(template_id);
    check(tool_it == tools.end(), "Tool with this template id already exists");
 
@@ -122,11 +117,9 @@ ACTION p2ewgamelogi::addtool(
 }
 
 ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id){
-   user_tool_table user_tools(get_self(), get_self().value);
    auto it = user_tools.find(asset_id);
    check(it == user_tools.end(), "Tool with asset id already exist");
 
-   accounts_table accounts(get_self(), get_self().value);
    auto acc_it = accounts.find(wallet.value);
    check(acc_it != accounts.end(),"This wallet is not registered in the game");
    
@@ -140,20 +133,17 @@ ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id)
 ACTION p2ewgamelogi::claimtool( name wallet, uint64_t asset_id){
    require_auth(wallet);
 
-   user_tool_table user_tools(get_self(), get_self().value);
    auto user_tool_it = user_tools.find(asset_id);
-   check(user_tool_it == user_tools.end(),"Could not find the tool with the asset id");
+   check(user_tool_it != user_tools.end(),"Could not find the tool with the asset id");
 
-   tools_table tools(get_self(), get_self().value);
    auto tool_it = tools.find(user_tool_it->template_id);
-   check (tool_it == tools.end(),"Could not find the template for the asset id");
+   check (tool_it != tools.end(),"Could not find the template for the asset id");
 
    check(user_tool_it->current_durability >= tool_it->durability_consumed, 
       "Tool has not enough durability");
 
-   accounts_table accounts(get_self(), get_self().value);
    auto user_account_it = accounts.find(wallet.value);
-   check(user_account_it == accounts.end(), "User not found");
+   check(user_account_it != accounts.end(), "User not found");
 
    check(user_account_it->energy >= tool_it->energy_consumed, "Not enough energy for this action");
    int16_t energy_consumed = -static_cast<int16_t>(tool_it->energy_consumed);
@@ -164,21 +154,19 @@ ACTION p2ewgamelogi::claimtool( name wallet, uint64_t asset_id){
 }
 
 void p2ewgamelogi::change_energy(accounts_table::const_iterator user_account_it, int16_t amount){
-   accounts_table accounts(get_self(), get_self().value);
+   
    accounts.modify(user_account_it, get_self(), [&](auto& account){
-      account.enery += amount;
+      account.energy += amount;
    });
 }
 
 void p2ewgamelogi::change_tool_durability(user_tool_table::const_iterator user_tool_it, int16_t amount){
-   user_tool_table user_tools(get_self(), get_self().value);
    user_tools.modify(user_tool_it, get_self(), [&](auto& tool){
       tool.current_durability += amount;
    });
 }
 
 void p2ewgamelogi::change_balance(accounts_table::const_iterator user_account_it, asset amount){
-   accounts_table accounts(get_self(), get_self().value);
    accounts.modify(user_account_it, get_self(), [&](auto& acc){
       for(auto& balance : acc.balance){
          if(balance.symbol == amount.symbol){

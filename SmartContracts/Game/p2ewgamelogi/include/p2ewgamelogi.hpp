@@ -6,6 +6,13 @@ using namespace std;
 CONTRACT p2ewgamelogi : public contract {
    public:
       using contract::contract;
+      
+      p2ewgamelogi(name receiver, name code, datastream<const char*> ds)
+      :  contract (receiver, code, ds),
+         accounts(receiver, receiver.value),
+         user_tools(receiver, receiver.value),
+         tools(receiver, receiver.value)
+      {}
 
       ACTION hi( name nm );
       ACTION addaccount( name wallet);
@@ -77,6 +84,10 @@ CONTRACT p2ewgamelogi : public contract {
          indexed_by<"bywallet"_n, const_mem_fun<user_tool, uint64_t, &user_tool::by_wallet>>
       > user_tool_table;
 
+      accounts_table accounts;
+      tools_table tools;
+      user_tool_table user_tools;
+      
       void send_token(name to, asset quantity, string memo);
       void change_energy(accounts_table::const_iterator user_account_it, int16_t amount);
       void change_tool_durability(user_tool_table::const_iterator user_tool_it, int16_t amount);
