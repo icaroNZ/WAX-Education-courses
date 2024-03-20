@@ -120,3 +120,88 @@ ACTION p2ewgamelogi::addtool(
                new_tool.charge_time = charge_time;
                new_tool.tokens_mint = tokens_mint; });
 }
+
+ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id){
+   user_tool_table user_tools(get_self(), get_self().value);
+   auto it = user_tools.find(asset_id);
+   check(it == user_tools.end(), "Tool with asset id already exist");
+
+   accounts_table accounts(get_self(), get_self().value);
+   auto acc_it = accounts.find(wallet.value);
+   check(acc_it != accounts.end(),"This wallet is not registered in the game");
+   
+   user_tools.emplace(get_self(), [&](auto& new_tool){
+      new_tool.asset_id = asset_id;
+      new_tool.wallet = wallet;
+      new_tool.template_id = template_id;
+   });
+}
+
+ACTION p2ewgamelogi::claimtool( name wallet, uint64_t asset_id){
+   require_auth(wallet);
+
+   user_tool_table user_tools(get_self(), get_self().value);
+   auto user_tool_it = user_tools.find(asset_id);
+   check(user_tool_it == user_tools.end(),"Could not find the tool with the asset id");
+
+   tools_table tools(get_self(), get_self().value);
+   auto tool_it = tools.find(user_tool_it->template_id);
+   check (tool_it == tools.end(),"Could not find the template for the asset id");
+
+   check(user_tool_it->current_durability >= tool_it->durability_consumed, 
+      "Tool has not enough durability");
+
+   accounts_table accounts(get_self(), get_self().value);
+   auto user_account_it = accounts.find(wallet.value);
+   check(user_account_it == accounts.end(), "User not found");
+
+   check(user_account_it->energy >= tool_it->energy_consumed, "Not enough energy for this action");
+   int16_t energy_consumed = -static_cast<int16_t>(tool_it->energy_consumed);
+   change_energy(user_account_it, energy_consumed);
+   int16_t durability_consumed = -static_cast<int16_t>(tool_it->durability_consumed);
+   change_tool_durability(user_tool_it, durability_consumed);
+}
+
+void p2ewgamelogi::change_energy(accounts_table::const_iterator user_account_it, int16_t amount){
+   accounts_table accounts(get_self(), get_self().value);
+   accounts.modify(user_account_it, get_self(), [&](auto& account){
+      account.enery += amount;
+   });
+}
+
+void p2ewgamelogi::change_tool_durability(user_tool_table::const_iterator user_tool_it, int16_t amount){
+   user_tool_table user_tools(get_self(), get_self().value);
+   user_tools.modify(user_tool_it, get_self(), [&](auto& tool){
+      tool.current_durability += amount;
+   });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
