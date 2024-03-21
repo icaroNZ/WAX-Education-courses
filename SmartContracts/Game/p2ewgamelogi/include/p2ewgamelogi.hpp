@@ -13,7 +13,6 @@ CONTRACT p2ewgamelogi : public contract {
          user_tools(receiver, receiver.value),
          tools(receiver, receiver.value)
       {}
-
       ACTION hi( name nm );
       ACTION addaccount( name wallet);
       ACTION withdraw ( name wallet, asset quantity );
@@ -28,6 +27,8 @@ CONTRACT p2ewgamelogi : public contract {
          uint16_t charge_time,
          vector<asset> tokens_mint);
       ACTION claimtool( name wallet, uint64_t asset_id);
+      ACTION addenergy( name wallet, asset amount);
+      ACTION mintnft( name wallet, int32_t template_id);
 
       [[eosio::on_notify("p2ewgametken::transfer")]]
       void on_transfer(name from, name to, asset quantity, string memo);

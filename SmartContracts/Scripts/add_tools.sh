@@ -6,4 +6,4 @@ cleos push action p2ewgamelogi addtool '["3", "Chainsaw", "wood","chainsaw image
 cleos push action p2ewgamelogi addtool '["4", "Rod", "food","rod rod image",0,5,"5.0000 FOOD", 3600, [ "200.0000 GOLD", "1200.0000 WOOD" ]]' -p p2ewgamelogi@active
 cleos push action p2ewgamelogi addtool '["5", "Net", "food","net image",0,20,"20.0000 FOOD", 3600, [ "800.0000 GOLD", "4800.0000 WOOD" ]]' -p p2ewgamelogi@active
 cleos push action p2ewgamelogi addtool '["6", "Boat", "food","boat image",0,32,"80.0000 FOOD", 3600, [ "3200.0000 GOLD", "19200.0000 WOOD" ]]' -p p2ewgamelogi@active
-cleos push action p2ewgamelogi addtool '["7", "Excavator", "gold","excavator image",133,5,"5.0000 WOOD", 3600, [ "4000.0000 GOLD", "24000.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos push action p2ewgamelogi addtool '["7", "Excavator", "gold","excavator image",133,5,"100.0000 GOLD", 3600, [ "4000.0000 GOLD", "24000.0000 WOOD" ]]' -p p2ewgamelogi@active

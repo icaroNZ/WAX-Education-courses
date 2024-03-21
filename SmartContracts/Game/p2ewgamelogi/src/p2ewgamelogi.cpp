@@ -4,7 +4,7 @@
 ACTION p2ewgamelogi::hi(name nm)
 {
    /* fill in action body */
-   print_f("Name : %\n", nm);
+   print_f("Name : %", nm);
 }
 
 ACTION p2ewgamelogi::addaccount(name wallet)
@@ -153,11 +153,11 @@ ACTION p2ewgamelogi::claimtool( name wallet, uint64_t asset_id){
    change_energy(user_account_it, energy_consumed);
    int16_t durability_consumed = -static_cast<int16_t>(tool_it->durability_consumed);
    change_tool_durability(user_tool_it, durability_consumed);
+   change_next_avaliable(user_tool_it, tool_it->charge_time);
    change_balance(user_account_it, tool_it->reward);
 }
 
 void p2ewgamelogi::change_energy(accounts_table::const_iterator user_account_it, int16_t amount){
-   
    accounts.modify(user_account_it, get_self(), [&](auto& account){
       account.energy += amount;
    });
@@ -171,13 +171,18 @@ void p2ewgamelogi::change_tool_durability(user_tool_table::const_iterator user_t
 
 void p2ewgamelogi::change_balance(accounts_table::const_iterator user_account_it, asset amount){
    accounts.modify(user_account_it, get_self(), [&](auto& acc){
-      for(auto& balance : acc.balance){
-         if(balance.symbol == amount.symbol){
-            balance.amount += amount.amount;
-            return;
+      auto it = std::find_if(acc.balance.begin(), acc.balance.end(), [&](const auto& balance){
+         return balance.symbol == amount.symbol;
+      });
+
+      if(it != acc.balance.end()){
+         it->amount += amount.amount;
+         if(it->amount == 0){
+            acc.balance.erase(it);
          }
-      };
-      acc.balance.push_back(amount);
+      } else if (amount.amount > 0){
+         acc.balance.push_back(amount);
+      }
    });
 }
 
@@ -190,12 +195,64 @@ void p2ewgamelogi::change_next_avaliable(user_tool_table::const_iterator user_to
    });
 }
 
+ACTION p2ewgamelogi::addenergy( name wallet, asset amount){
+   require_auth(wallet);
+   check(amount.amount > 0, "Invallid amount");
+   symbol food_symbol("FOOD", 4);
+   check(amount.symbol ==  food_symbol, "Invalid token");
+   auto account_it = accounts.find(wallet.value);
+   check(account_it != accounts.end(),"Account not found");
+   auto food_it = std::find_if(account_it->balance.begin(), account_it->balance.end(), [&](auto& balance){
+      return balance.symbol == food_symbol;
+   });
+   check(food_it != account_it->balance.end(), "Could not find the asset for this transaction");
+   
+   uint64_t max_energy = account_it->energy_max - account_it->energy;
+   uint64_t required_food = max_energy / 5 * 10000; 
+   uint64_t actual_food_use = std::min(static_cast<uint64_t>(required_food),static_cast<uint64_t>(amount.amount));
+   check(food_it->amount >= actual_food_use, "Insuficient FOOD balance");
+   auto food_index = distance(account_it->balance.begin(), food_it);
+   accounts.modify(account_it, get_self(), [&](auto& acc){
+      acc.energy += actual_food_use/10000 * 5; 
+      if(acc.energy > acc.energy_max){
+         acc.energy = acc.energy_max;
+      };
+      acc.balance[food_index].amount -= actual_food_use;
+   });
+}
 
+ACTION p2ewgamelogi::mintnft( name wallet, int32_t template_id){
+   require_auth(wallet);
 
+   auto tool_it = tools.find(template_id);
+   check(tool_it != tools.end(), "Template not found");
 
+   auto account_it = accounts.find(wallet.value);
+   check(account_it != accounts.end(), "Account not found");
 
+   auto& tokens_mint = tool_it->tokens_mint;
+   check(tokens_mint.size() > 0, "Mint cost is not defined for this template id");
 
+   for(const auto& cost: tokens_mint){
+      bool found_token = false;
+      for(const auto& balance: account_it->balance){
+         if(cost.symbol == balance.symbol && cost.amount <= balance.amount){
+            found_token = true;
+            break;
+         }
+      }
+      check(found_token, "Insuficient balance for token: " + cost.symbol.code().to_string());
+   }
 
+   accounts.modify(account_it, get_self(), [&](auto& acc){
+      for(const auto& cost: tokens_mint){
+         asset subtract_cost(-cost.amount, cost.symbol);
+         change_balance(account_it, subtract_cost);
+      }
+   });
+
+   print_f("NFT minted successgully");
+}
 
 
 
