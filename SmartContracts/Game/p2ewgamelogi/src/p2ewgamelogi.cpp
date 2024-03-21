@@ -1,4 +1,5 @@
 #include <p2ewgamelogi.hpp>
+#include <eosio/system.hpp>
 
 ACTION p2ewgamelogi::hi(name nm)
 {
@@ -141,7 +142,9 @@ ACTION p2ewgamelogi::claimtool( name wallet, uint64_t asset_id){
 
    check(user_tool_it->current_durability >= tool_it->durability_consumed, 
       "Tool has not enough durability");
-
+   auto time_now = current_time_point().sec_since_epoch();
+   check(time_now >= user_tool_it->next_avaliable.sec_since_epoch(), "Tool not avaliable for use");
+   
    auto user_account_it = accounts.find(wallet.value);
    check(user_account_it != accounts.end(), "User not found");
 
@@ -175,6 +178,15 @@ void p2ewgamelogi::change_balance(accounts_table::const_iterator user_account_it
          }
       };
       acc.balance.push_back(amount);
+   });
+}
+
+void p2ewgamelogi::change_next_avaliable(user_tool_table::const_iterator user_tool_it, int16_t amount){
+   user_tools.modify(user_tool_it, get_self(), [&](auto& tool){
+      auto time_now = current_time_point().sec_since_epoch();
+      auto next_use = time_now + amount;
+      auto next_avalialbe = time_point_sec(next_use);
+      tool.next_avaliable = next_avalialbe;
    });
 }
 

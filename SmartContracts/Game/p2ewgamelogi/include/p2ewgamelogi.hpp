@@ -92,4 +92,5 @@ CONTRACT p2ewgamelogi : public contract {
       void change_energy(accounts_table::const_iterator user_account_it, int16_t amount);
       void change_tool_durability(user_tool_table::const_iterator user_tool_it, int16_t amount);
       void change_balance(accounts_table::const_iterator user_account_it, asset amount);
+      void change_next_avaliable(user_tool_table::const_iterator user_tool_it, int16_t amount);
 };
