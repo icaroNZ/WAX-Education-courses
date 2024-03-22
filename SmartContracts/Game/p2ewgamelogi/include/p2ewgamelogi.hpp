@@ -13,9 +13,9 @@ CONTRACT p2ewgamelogi : public contract {
          user_tools(receiver, receiver.value),
          tools(receiver, receiver.value)
       {}
-      ACTION hi( name nm );
-      ACTION addaccount( name wallet);
-      ACTION withdraw ( name wallet, asset quantity );
+      ACTION hi(name nm );
+      ACTION addaccount(name wallet);
+      ACTION withdraw (name wallet, asset quantity );
       ACTION addtool(         
          int32_t template_id, 
          string name,
@@ -26,9 +26,10 @@ CONTRACT p2ewgamelogi : public contract {
          asset reward,
          uint16_t charge_time,
          vector<asset> tokens_mint);
-      ACTION claimtool( name wallet, uint64_t asset_id);
-      ACTION addenergy( name wallet, asset amount);
-      ACTION mintnft( name wallet, int32_t template_id);
+      ACTION claimtool(name wallet, uint64_t asset_id);
+      ACTION addenergy(name wallet, asset amount);
+      ACTION mintnft(name wallet, int32_t template_id);
+      ACTION fixtool(name wallet, uint64_t asset_id);
 
       [[eosio::on_notify("p2ewgametken::transfer")]]
       void on_transfer(name from, name to, asset quantity, string memo);
@@ -39,23 +40,18 @@ CONTRACT p2ewgamelogi : public contract {
       using hi_action = action_wrapper<"hi"_n, &p2ewgamelogi::hi>;
    
    private:
-      // Define the struct of the table
       TABLE account {
-         name wallet; // primary key
+         name wallet;
          uint16_t energy = 100;
          uint16_t energy_max = 300;
          vector<asset> balance;
 
-         // Define the primary key
          uint64_t primary_key() const { return wallet.value; }
       };
-
-
-      // Define the multi_index table of raccount
       typedef multi_index<"accounts"_n, account> accounts_table;
 
       TABLE tool {
-         int32_t template_id; //primary key
+         int32_t template_id;
          string name;
          string type;
          string img;
@@ -70,8 +66,8 @@ CONTRACT p2ewgamelogi : public contract {
       typedef multi_index<"tools"_n, tool> tools_table;
 
       TABLE user_tool {
-         uint64_t asset_id; // primary key
-         name wallet; // secondary key
+         uint64_t asset_id;
+         name wallet;
          int32_t template_id;
          uint16_t current_durability = 100;
          uint16_t max_durability = 100;
@@ -80,7 +76,6 @@ CONTRACT p2ewgamelogi : public contract {
          uint64_t primary_key() const { return asset_id; }
          uint64_t by_wallet() const { return wallet.value; }          
       };
-
       typedef multi_index <"usertools"_n, user_tool,
          indexed_by<"bywallet"_n, const_mem_fun<user_tool, uint64_t, &user_tool::by_wallet>>
       > user_tool_table;
