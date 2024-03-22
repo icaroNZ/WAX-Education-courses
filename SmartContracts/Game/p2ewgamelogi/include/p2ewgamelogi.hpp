@@ -30,7 +30,8 @@ CONTRACT p2ewgamelogi : public contract {
       ACTION addenergy(name wallet, asset amount);
       ACTION mintnft(name wallet, int32_t template_id);
       ACTION fixtool(name wallet, uint64_t asset_id);
-
+      ACTION removenft(name wallet, uint64_t asset_id);
+      
       [[eosio::on_notify("p2ewgametken::transfer")]]
       void on_transfer(name from, name to, asset quantity, string memo);
 

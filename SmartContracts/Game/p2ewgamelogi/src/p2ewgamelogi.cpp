@@ -272,6 +272,20 @@ ACTION p2ewgamelogi::fixtool( name wallet, uint64_t asset_id){
    change_tool_durability(user_tool_it, gap);
 }
 
+ACTION p2ewgamelogi::removenft(name wallet, uint64_t asset_id){
+   require_auth(wallet);
+   auto user_tool_it = user_tools.find(asset_id);
+   check(user_tool_it != user_tools.end(), "Tool with asset id not found");
+   check(user_tool_it->wallet == wallet, "This is not your NFT");
+   check(user_tool_it->current_durability == user_tool_it->max_durability, "Tool need to be fixed before remove");
+   auto account_it = accounts.find(wallet.value);
+   check(account_it != accounts.end(), "Account not found");
+   check(account_it->energy >= 100, "Energy needs to be at least 100 to remove your tool");
+
+   user_tools.erase(user_tool_it);
+
+   print_f("NFT sent back to wallet");
+}
 
 
 
