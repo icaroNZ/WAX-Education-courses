@@ -1,5 +1,6 @@
 # Wax Testnet accounts and keys
-`
+```Private key for testnet local wallet```
+
 ```json
 {
     "msg": "succeeded",
@@ -31,3 +32,12 @@
     "account": "p2ewgamelogi"
 }
 ```
+
+## Import wallet keys:
+```bash
+cleos wallet import --name testnet --private-key 5HyYSszwRmqm6pSeuwHZ9tyXLt6yn3tdjWa23yta2CHDpnkMvUM
+cleos wallet import --name testnet --private-key 5K5sNWMNe7UPGe2PKnqVuNuChqP458X7b17zwpzXBeaR69km59q
+c get account p2ewgametken
+c get account p2ewgamelogi
+```
+
