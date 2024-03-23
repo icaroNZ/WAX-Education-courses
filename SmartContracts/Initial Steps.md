@@ -76,7 +76,7 @@ eosio-cpp -I include -o p2ewgametken.wasm src/p2ewgametken.cpp --abigen
 
 ## Deploy Contract
 ```bash
-cleos set contract p2ewgametken Token/p2ewgametken --abi p2ewgametken.abi -p p2ewgametken@active
+cleos set contract p2ewgametken Token p2ewgametken.wasm --abi p2ewgametken.abi -p p2ewgametken@active
 ```
 
 ## Create Token
