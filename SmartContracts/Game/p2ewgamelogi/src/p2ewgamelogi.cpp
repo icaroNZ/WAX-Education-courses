@@ -1,5 +1,6 @@
 #include <p2ewgamelogi.hpp>
 #include <eosio/system.hpp>
+#include <atomicassets/atomicassets-interface.hpp>
 
 ACTION p2ewgamelogi::hi(name nm){
    /* fill in action body */
@@ -105,20 +106,6 @@ ACTION p2ewgamelogi::addtool(
       new_tool.reward = reward;
       new_tool.charge_time = charge_time;
       new_tool.tokens_mint = tokens_mint; 
-   });
-}
-
-ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id){
-   auto it = user_tools.find(asset_id);
-   check(it == user_tools.end(), "Tool with asset id already exist");
-
-   auto acc_it = accounts.find(wallet.value);
-   check(acc_it != accounts.end(),"This wallet is not registered in the game");
-   
-   user_tools.emplace(get_self(), [&](auto& new_tool){
-      new_tool.asset_id = asset_id;
-      new_tool.wallet = wallet;
-      new_tool.template_id = template_id;
    });
 }
 
@@ -287,10 +274,32 @@ ACTION p2ewgamelogi::removenft(name wallet, uint64_t asset_id){
    print_f("NFT sent back to wallet");
 }
 
+void p2ewgamelogi::on_nft_transfer(name from, name to, vector <uint64_t> asset_ids, string memo){
+   if(to != get_self()){
+      return;
+   }
+   check(memo == "Deposit NFT", "Wrong memo for deposit the NFT in account");
+   auto account_it = accounts.find(from.value);
+   check(account_it != accounts.end(), "Could not stake the NFT as account was not found");
+   auto assets = atomicassets::get_assets(get_self());
+   for(const uint64_t& asset_id: asset_ids){
+      assets.require_find(asset_id, "Could not find the asset id with id " + asset_id);
+      auto it = user_tools.find(asset_id);
+      check(it == user_tools.end(), "Tool with asset id already exist " + asset_id);
+   }
+   for(const uint64_t& asset_id: asset_ids){
+      auto add_asset = assets.find(asset_id);
+      addnft(asset_id, from, add_asset->template_id);
+   }
+}
 
-
-
-
+ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id){
+   user_tools.emplace(get_self(), [&](auto& new_tool){
+      new_tool.asset_id = asset_id;
+      new_tool.wallet = wallet;
+      new_tool.template_id = template_id;
+   });
+}
 
 
 

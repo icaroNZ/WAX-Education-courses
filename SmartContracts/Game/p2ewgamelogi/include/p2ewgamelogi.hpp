@@ -34,7 +34,8 @@ CONTRACT p2ewgamelogi : public contract {
       
       [[eosio::on_notify("p2ewgametken::transfer")]]
       void on_transfer(name from, name to, asset quantity, string memo);
-
+      [[eosio::on_notify("atomicassets::transfer")]]
+      void on_nft_transfer(name from, name to, vector <uint64_t> asset_ids, string memo);
       // Transform into a notification function
       ACTION addnft(uint64_t asset_id, name wallet, int32_t template_id);
       
