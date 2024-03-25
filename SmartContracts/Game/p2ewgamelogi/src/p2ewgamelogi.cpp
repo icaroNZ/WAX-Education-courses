@@ -234,7 +234,7 @@ ACTION p2ewgamelogi::mintnft( name wallet, int32_t template_id){
       }
    });
 
-   print_f("NFT minted successgully");
+   mint_nft(wallet, template_id, 1);
 }
 
 ACTION p2ewgamelogi::fixtool( name wallet, uint64_t asset_id){
@@ -303,35 +303,20 @@ void p2ewgamelogi::add_nft(uint64_t asset_id, name wallet, int32_t template_id){
 }
 
 void p2ewgamelogi::mint_nft(name wallet, int32_t template_id, uint8_t quantity){
-   
+   auto templates = atomicassets::get_templates(COLLETION_NAME);
+   auto template_info = templates.find(static_cast<uint64_t>(template_id));
+   auto empty_asset_data = std::map <std::string, atomicassets::ATOMIC_ATTRIBUTE> {};
+   auto tokens_back = vector <asset>{};
+   while(quantity > 0){
+      action(permission_level{get_self(), "active"_n},
+         atomicassets::ATOMICASSETS_ACCOUNT, "mintasset"_n,
+         make_tuple(get_self(), COLLETION_NAME, template_info->schema_name, wallet,
+            empty_asset_data, empty_asset_data
+         )
+      ).send();
+      quantity--;
+   }
 }
-
-   //  ACTION mintasset(
-   //      name authorized_minter,
-   //      name collection_name,
-   //      name schema_name,
-   //      int32_t template_id,
-   //      name new_asset_owner,
-   //      ATTRIBUTE_MAP immutable_data,
-   //      ATTRIBUTE_MAP mutable_data,
-   //      vector <asset> tokens_to_back
-   //  );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

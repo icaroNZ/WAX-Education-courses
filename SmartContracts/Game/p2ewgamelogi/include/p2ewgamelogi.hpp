@@ -6,7 +6,8 @@ using namespace std;
 CONTRACT p2ewgamelogi : public contract {
    public:
       using contract::contract;
-      
+      static constexpr name COLLETION_NAME = "name"_n;
+ 
       p2ewgamelogi(name receiver, name code, datastream<const char*> ds)
       :  contract (receiver, code, ds),
          accounts(receiver, receiver.value),
