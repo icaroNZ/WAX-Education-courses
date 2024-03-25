@@ -36,8 +36,6 @@ CONTRACT p2ewgamelogi : public contract {
       void on_transfer(name from, name to, asset quantity, string memo);
       [[eosio::on_notify("atomicassets::transfer")]]
       void on_nft_transfer(name from, name to, vector <uint64_t> asset_ids, string memo);
-      // Transform into a notification function
-      ACTION addnft(uint64_t asset_id, name wallet, int32_t template_id);
       
       using hi_action = action_wrapper<"hi"_n, &p2ewgamelogi::hi>;
    
@@ -91,4 +89,6 @@ CONTRACT p2ewgamelogi : public contract {
       void change_tool_durability(user_tool_table::const_iterator user_tool_it, int16_t amount);
       void change_balance(accounts_table::const_iterator user_account_it, asset amount);
       void change_next_avaliable(user_tool_table::const_iterator user_tool_it, int16_t amount);
+      void add_nft(uint64_t asset_id, name wallet, int32_t template_id);
+      void mint_nft(name wallet, int32_t template_id, uint8_t quantity);
 };

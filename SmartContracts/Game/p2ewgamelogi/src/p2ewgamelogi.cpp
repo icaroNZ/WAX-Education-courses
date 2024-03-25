@@ -1,6 +1,7 @@
 #include <p2ewgamelogi.hpp>
 #include <eosio/system.hpp>
 #include <atomicassets/atomicassets-interface.hpp>
+#include <atomicassets/atomicdata.hpp>
 
 ACTION p2ewgamelogi::hi(name nm){
    /* fill in action body */
@@ -283,17 +284,17 @@ void p2ewgamelogi::on_nft_transfer(name from, name to, vector <uint64_t> asset_i
    check(account_it != accounts.end(), "Could not stake the NFT as account was not found");
    auto assets = atomicassets::get_assets(get_self());
    for(const uint64_t& asset_id: asset_ids){
-      assets.require_find(asset_id, "Could not find the asset id with id " + asset_id);
+      assets.require_find(asset_id, ("Could not find the asset id with id " + std::to_string(asset_id)).c_str());
       auto it = user_tools.find(asset_id);
-      check(it == user_tools.end(), "Tool with asset id already exist " + asset_id);
+      check(it == user_tools.end(), "Tool with asset id already exist " + std::to_string(asset_id));
    }
    for(const uint64_t& asset_id: asset_ids){
       auto add_asset = assets.find(asset_id);
-      addnft(asset_id, from, add_asset->template_id);
+      add_nft(asset_id, from, add_asset->template_id); 
    }
 }
 
-ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id){
+void p2ewgamelogi::add_nft(uint64_t asset_id, name wallet, int32_t template_id){
    user_tools.emplace(get_self(), [&](auto& new_tool){
       new_tool.asset_id = asset_id;
       new_tool.wallet = wallet;
@@ -301,7 +302,20 @@ ACTION p2ewgamelogi::addnft(uint64_t asset_id, name wallet, int32_t template_id)
    });
 }
 
+void p2ewgamelogi::mint_nft(name wallet, int32_t template_id, uint8_t quantity){
+   
+}
 
+   //  ACTION mintasset(
+   //      name authorized_minter,
+   //      name collection_name,
+   //      name schema_name,
+   //      int32_t template_id,
+   //      name new_asset_owner,
+   //      ATTRIBUTE_MAP immutable_data,
+   //      ATTRIBUTE_MAP mutable_data,
+   //      vector <asset> tokens_to_back
+   //  );
 
 
 
