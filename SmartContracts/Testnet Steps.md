@@ -85,3 +85,4 @@ c set contract p2ewgamelogi Game/p2ewgamelogi p2ewgamelogi.wasm --abi p2ewgamelo
 ```bash
 cleos push action p2ewgamelogi addaccount '["p2ewtestacc1"]'
 ```
+
