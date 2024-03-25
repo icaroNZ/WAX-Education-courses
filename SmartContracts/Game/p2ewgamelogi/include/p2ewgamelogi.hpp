@@ -92,4 +92,5 @@ CONTRACT p2ewgamelogi : public contract {
       void change_next_avaliable(user_tool_table::const_iterator user_tool_it, int16_t amount);
       void add_nft(uint64_t asset_id, name wallet, int32_t template_id);
       void mint_nft(name wallet, int32_t template_id, uint8_t quantity);
+      void transfer_nft(name wallet, vector<uint64_t> assets_id);
 };

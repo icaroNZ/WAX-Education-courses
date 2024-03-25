@@ -269,10 +269,11 @@ ACTION p2ewgamelogi::removenft(name wallet, uint64_t asset_id){
    auto account_it = accounts.find(wallet.value);
    check(account_it != accounts.end(), "Account not found");
    check(account_it->energy >= 100, "Energy needs to be at least 100 to remove your tool");
-
+   vector<uint64_t> assets_id;
+   assets_id.push_back(asset_id);
    user_tools.erase(user_tool_it);
 
-   print_f("NFT sent back to wallet");
+   transfer_nft(wallet, assets_id);
 }
 
 void p2ewgamelogi::on_nft_transfer(name from, name to, vector <uint64_t> asset_ids, string memo){
@@ -318,8 +319,19 @@ void p2ewgamelogi::mint_nft(name wallet, int32_t template_id, uint8_t quantity){
    }
 }
 
+void p2ewgamelogi::transfer_nft(name wallet, vector<uint64_t> assets_id){
+   action(permission_level{get_self(), "active"_n},
+      atomicassets::ATOMICASSETS_ACCOUNT, "transfer"_n,
+      make_tuple(get_self(), wallet, assets_id, "Withdraw NFTs")
+   ).send();
+}
 
-
+   //  ACTION transfer(
+   //      name from,
+   //      name to,
+   //      vector <uint64_t> asset_ids,
+   //      string memo
+   //  );
 
 
 
