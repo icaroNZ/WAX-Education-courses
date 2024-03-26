@@ -311,13 +311,31 @@ void p2ewgamelogi::mint_nft(name wallet, int32_t template_id, uint8_t quantity){
    while(quantity > 0){
       action(permission_level{get_self(), "active"_n},
          atomicassets::ATOMICASSETS_ACCOUNT, "mintasset"_n,
-         make_tuple(get_self(), COLLETION_NAME, template_info->schema_name, wallet,
-            empty_asset_data, empty_asset_data
+         make_tuple(
+            get_self(), 
+            COLLETION_NAME, 
+            template_info->schema_name,
+            template_id, 
+            wallet,
+            empty_asset_data, 
+            empty_asset_data,
+            tokens_back
          )
       ).send();
       quantity--;
    }
 }
+
+   //  ACTION mintasset(
+   //      name authorized_minter,
+   //      name collection_name,
+   //      name schema_name,
+   //      int32_t template_id,
+   //      name new_asset_owner,
+   //      ATTRIBUTE_MAP immutable_data,
+   //      ATTRIBUTE_MAP mutable_data,
+   //      vector <asset> tokens_to_back
+   //  );
 
 void p2ewgamelogi::transfer_nft(name wallet, vector<uint64_t> assets_id){
    const string message = "Withdraw NFTs";

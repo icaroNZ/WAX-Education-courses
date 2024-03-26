@@ -6,7 +6,6 @@ using namespace std;
 CONTRACT p2ewgamelogi : public contract {
    public:
       using contract::contract;
-      static constexpr name COLLETION_NAME = "name"_n;
  
       p2ewgamelogi(name receiver, name code, datastream<const char*> ds)
       :  contract (receiver, code, ds),
@@ -41,6 +40,8 @@ CONTRACT p2ewgamelogi : public contract {
       using hi_action = action_wrapper<"hi"_n, &p2ewgamelogi::hi>;
    
    private:
+      static constexpr name COLLETION_NAME = "p2efarmerswd"_n;
+
       TABLE account {
          name wallet;
          uint16_t energy = 100;

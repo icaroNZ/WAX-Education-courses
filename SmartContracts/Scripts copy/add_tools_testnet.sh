@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642288", "Axe",              "wood","QmakMWj6RsxMwjehE6XLijyVoXauLdVwfHwKuws4iVpTEMf",10,5, "5.0000 WOOD",   3600, [  "400.0000 GOLD",   "2400.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642290", "Saw",              "wood","QmVwb24SajmFS7ZMJcN8PG0EzUKR9iGCMviURVpnZe4MNv" ,30,15,"17.0000 WOOD",  3600, [ "1200.0000 GOLD",  "7200.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642291", "Chainsaw",         "wood","Qmc4mKaihNmXWHyHJnwHssicMhD6YxbJXqrTTjtpaexH7"  ,60,45,"54.0000 WOOD",  3600, [ "3600.0000 GOLD", "21600.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642292", "Fishing Rod",      "food","QmWHmgevW853WQj3jfw4yNygrr8JFkzqjtQM22wxGiG9h"  ,0,5,  "5.0000 FOOD",   3600, [  "200.0000 GOLD",   "1200.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642293", "Fishing Net",      "food","QmRTN2UJFJbyEaQi8R3iPTnwWWuBbZXyYfF2irJ9gIkfzyK",0,20, "20.0000 FOOD",  3600, [  "800.0000 GOLD",   "4800.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642294", "Fishing Boat",     "food","QmUDXxb2hMGmVoD3rVcMdXXGazdHiNHsSfarU99rzisB6"  ,0,32, "80.0000 FOOD",  3600, [ "3200.0000 GOLD", "19200.0000 WOOD" ]]' -p p2ewgamelogi@active
+cleos --url http://waxtest.eu.eosamsterdam.net push action p2ewgamelogi addtool '["642295", "Mining Excavator", "gold","QmaNlGD2Ljdakf4KFGdmd7jsucnC0aXcew2pZXCxrHFnu"  ,133,5,"100.0000 GOLD", 3600, [ "4000.0000 GOLD", "24000.0000 WOOD" ]]' -p p2ewgamelogi@active
