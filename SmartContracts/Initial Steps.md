@@ -120,3 +120,8 @@ cleos get table p2ewgametken acc1 accounts
 cleos get currency balance p2ewgametken acc1 GOLD
 cleos get currency balance p2ewgametken acc2
 ```
+
+## Add eosio.code to account
+```bash
+cleos set account permission p2ewgamelogi active --add-code -p p2ewgamelogi@active
+```

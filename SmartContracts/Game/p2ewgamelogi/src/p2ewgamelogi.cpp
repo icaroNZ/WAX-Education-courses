@@ -320,9 +320,10 @@ void p2ewgamelogi::mint_nft(name wallet, int32_t template_id, uint8_t quantity){
 }
 
 void p2ewgamelogi::transfer_nft(name wallet, vector<uint64_t> assets_id){
+   const string message = "Withdraw NFTs";
    action(permission_level{get_self(), "active"_n},
       atomicassets::ATOMICASSETS_ACCOUNT, "transfer"_n,
-      make_tuple(get_self(), wallet, assets_id, "Withdraw NFTs")
+      make_tuple(get_self(), wallet, assets_id, message)
    ).send();
 }
 
