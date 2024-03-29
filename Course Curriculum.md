@@ -34,7 +34,7 @@
 
 ---
 
-# Course 2: Build Your NFT Game on WAX: Part 1 - Creating the tokens - Fundamentals
+# Course 2: Build Your NFT Game on WAX: Part 2 - Fundamentals
 
 **Total Course Time: 1:06:47**
 
@@ -65,7 +65,7 @@
 
 ---
 
-# Course 3: Build Your NFT Game on WAX: Part 1 - Advanced Interactions
+# Course 3: Build Your NFT Game on WAX: Part 3 - Advanced Interactions
 
 **Total Course Time: 1:26:46**
 
@@ -102,7 +102,7 @@
 
 ---
 
-# Course 4: Build Your NFT Game on WAX: Part 1 - Troubleshooting & more
+# Course 4: Build Your NFT Game on WAX: Part 4 - Troubleshooting & more
 
 **Total Course Time: 1:23:18**
 
@@ -144,7 +144,7 @@
 
 ---
 
-# Course 5: Build Your NFT Game on WAX: Part 1 - Deploying the game
+# Course 5: Build Your NFT Game on WAX: Part 5 - Deploying the game
 
 **Total Course Time: 50:38**
 
