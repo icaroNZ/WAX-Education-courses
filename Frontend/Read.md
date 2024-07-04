@@ -14,3 +14,8 @@ npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```bash
 npm install @reduxjs/toolkit react-redux
 ```
+
+## Install Redux Saga
+```bash
+npm install redux-saga
+```
