@@ -19,3 +19,8 @@ npm install @reduxjs/toolkit react-redux
 ```bash
 npm install redux-saga
 ```
+
+## Wharfkit WAX tools
+```bash
+npm install @wharfkit/web-renderer @wharfkit/session @wharfkit/wallet-plugin-anchor
+```
