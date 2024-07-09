@@ -1,13 +1,22 @@
 import {configureStore} from '@reduxjs/toolkit'
 import authReducer from '../features/auth/authSlice'
+import tokensReducer from '../features/tokens/tokensSlice'
+import userReducer from '../features/user/userSlice'
+import toolsDetailsReducer from '../features/tools/toolsDetailsSlice'
 import createSagaMiddleware from 'redux-saga'
 import { watchLoginStatus } from '../features/auth/authSaga';
+import { watchTokens } from '../features/tokens/tokensSaga';
+import { all } from 'redux-saga/effects';
+import { watchUserDetails } from '../features/user/userSaga'
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
     reducer:{
-        auth: authReducer
+        auth: authReducer,
+        tokens: tokensReducer,
+        user: userReducer,
+        toolsDetails: toolsDetailsReducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(sagaMiddleware)
@@ -15,5 +24,13 @@ const store = configureStore({
     devTools: process.env.NODE_ENV !== 'production'
 })
 
-sagaMiddleware.run(watchLoginStatus)
+function* rootSaga(){
+    yield all([
+        watchLoginStatus(),
+        watchTokens(),
+        watchUserDetails()
+    ])
+}
+
+sagaMiddleware.run(rootSaga)
 export default store;
