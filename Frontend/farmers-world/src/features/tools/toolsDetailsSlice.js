@@ -25,6 +25,6 @@ export const toolsDetailsSlice = createSlice({
     }
 });
 
-export const { fetchToolsDetailsReques, fetchToolsDetailsSuccess, fetchToolsDetailsFailure } = toolsDetailsSlice.actions
+export const { fetchToolsDetailsRequest, fetchToolsDetailsSuccess, fetchToolsDetailsFailure } = toolsDetailsSlice.actions
 
 export default toolsDetailsSlice.reducer;
