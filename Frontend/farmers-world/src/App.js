@@ -4,6 +4,7 @@ import SessionInitializer from './components/SessionInitializer';
 import InGameTokens from './components/InGameTokens';
 import EnergyBar from './components/EnergyBar';
 import ToolsDetailsInitiliazer from './components/ToolsDetailsInitializer';
+import ToolCarousel from './components/ToolsCarousel';
 
 function App(){
   return (
@@ -13,6 +14,7 @@ function App(){
       <NavBar />
       <EnergyBar />
       <InGameTokens />
+      <ToolCarousel />
     </Box>
   )
 }
