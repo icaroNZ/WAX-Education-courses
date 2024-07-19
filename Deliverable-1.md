@@ -14,11 +14,11 @@ This document outlines the completion of the first milestone for our proposal to
 
 ### Course Curriculum
 
-The course curriculum is meticulously designed to cover all necessary aspects of building a Play-to-Earn game on the WAX blockchain. A complete description of the course curriculum is available in the [Course Curriculum.md](Course%20Curriculum.md) file.
+The course curriculum is meticulously designed to cover all necessary aspects of building a Play-to-Earn game on the WAX blockchain. A complete description of the course curriculum is available in the [Course Curriculum - Smart Contract.md](Course%20Curriculum%20-%20Smart%20Contract.md) file.
 
 ### Additional Details
 
-- **Course Structure**: Given the current limitations imposed by WAX on course duration, the entire program is divided into 5 individual courses. This structure ensures that each course remains within the 2-hour duration limit, allowing for a more detailed and comprehensive exploration of the subject matter.
+- **Course Structure**: Given the current limitations imposed by Udemy on course duration, the entire program is divided into 5 individual courses. This structure ensures that each course remains within the 2-hour duration limit, allowing for a more detailed and comprehensive exploration of the subject matter.
   
 - **Extended Course Duration**: The final course exceeded the initially intended duration. This extension was necessary to ensure that all topics were covered thoroughly, providing learners with a deep understanding of building Play-to-Earn games on the WAX blockchain.
 
