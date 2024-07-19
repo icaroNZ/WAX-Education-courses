@@ -4,6 +4,7 @@ import tokensReducer from '../features/tokens/tokensSlice'
 import userReducer from '../features/user/userSlice'
 import toolsDetailsReducer from '../features/tools/toolsDetailsSlice'
 import userToolsReducer from '../features/userTools/userToolsSlice'
+import nftActionsReducer from '../features/actions/nftActionsSlice'
 import createSagaMiddleware from 'redux-saga'
 import { watchLoginStatus } from '../features/auth/authSaga';
 import { watchTokens } from '../features/tokens/tokensSaga';
@@ -11,6 +12,7 @@ import { all } from 'redux-saga/effects';
 import { watchUserDetails } from '../features/user/userSaga'
 import { watchToolsDetails } from '../features/tools/toolsDetailsSaga'
 import { watchUserTools } from '../features/userTools/userToolsSaga'
+import { watchNftActions } from '../features/actions/nftActionsSaga'
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,7 +22,8 @@ const store = configureStore({
         tokens: tokensReducer,
         user: userReducer,
         toolsDetails: toolsDetailsReducer,
-        userTools: userToolsReducer
+        userTools: userToolsReducer,
+        nftActions: nftActionsReducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(sagaMiddleware)
@@ -34,7 +37,8 @@ function* rootSaga(){
         watchTokens(),
         watchUserDetails(),
         watchToolsDetails(),
-        watchUserTools()
+        watchUserTools(),
+        watchNftActions(),
     ])
 }
 

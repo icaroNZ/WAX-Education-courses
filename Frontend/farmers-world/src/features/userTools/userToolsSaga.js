@@ -1,7 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { fetchUserToolsRequest, fetchUserToolsSuccess } from './userToolsSlice'
 import { fetchUserTools } from '../../services/wax/fetchUserTools'
-import { fetchUserDetailsRequest } from '../user/userSlice'
 import { fetchToolsDetailsFailure } from '../tools/toolsDetailsSlice';
 import { loginSuccess, restoreSessionSuccess } from '../auth/authSlice';
 

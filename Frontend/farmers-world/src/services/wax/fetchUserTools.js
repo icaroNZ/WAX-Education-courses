@@ -18,7 +18,7 @@ export const fetchUserTools = async (session, contractName) => {
                 templateId: row.template_id,
                 currentDurability: row.current_durability,
                 maxDurability: row.max_durability,
-                nextAvailable: row.next_avalieble
+                nextAvailable: row.next_avaliable
             }
             return acc;
         }, {});

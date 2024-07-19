@@ -5,6 +5,7 @@ import InGameTokens from './components/InGameTokens';
 import EnergyBar from './components/EnergyBar';
 import ToolsDetailsInitiliazer from './components/ToolsDetailsInitializer';
 import ToolCarousel from './components/ToolsCarousel';
+import HandleToast from './components/HandleToast';
 
 function App(){
   return (
@@ -15,6 +16,7 @@ function App(){
       <EnergyBar />
       <InGameTokens />
       <ToolCarousel />
+      <HandleToast />
     </Box>
   )
 }

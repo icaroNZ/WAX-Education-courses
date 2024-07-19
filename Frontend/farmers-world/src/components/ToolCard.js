@@ -1,14 +1,22 @@
 import React from 'react'
 import { Box, Spinner, VStack, Text, Image, HStack, Button } from '@chakra-ui/react'
-
+import { useDispatch } from 'react-redux'
+import {claimNftRequest } from '../features/actions/nftActionsSlice'
 const ToolCard = ({tool, toolDetails, userGold, userEnergy}) => {
+    const dispatch = useDispatch();
     const currentDurability = tool.currentDurability.toNumber();
     const maxDurability = tool.maxDurability.toNumber();
-    const canClaim = true;
+    const nextAvailable = new Date(tool.nextAvailable + 'Z')
+    const hasEnoughEnergy = userEnergy >= toolDetails.energyConsumed.toNumber()
+    const canClaim = nextAvailable <= new Date() && hasEnoughEnergy;
     const handleClaim = () => {
-        console.log('Claim')
+        if(canClaim){
+            dispatch(claimNftRequest(tool.assetId))
+        }
     }
-    const canFix = true;
+    const durabilityToFix = maxDurability - currentDurability
+    const goldToFix = durabilityToFix / 5
+    const canFix = userGold >= goldToFix;
     const handleFix = () => {
         console.log('Fix')
     }
