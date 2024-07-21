@@ -90,3 +90,37 @@
 - **Lecture 23**: Fixing the hash values coming from our smart contract table, **Time: 02:17**
 
 ---
+
+
+# Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 3
+
+**Total Course Time: 1:41:53**
+
+## Section 1: Carousel to show player staked NFTs
+**Total Time: 28:50**
+- **Lecture 1**: Creating a ToolCard component to display the NFTs, **Time: 09:05**
+- **Lecture 2**: Import the carousel library and start create our component, **Time: 02:13**
+- **Lecture 3**: Importing state and trying to loop over our tools, **Time: 04:28**
+- **Lecture 4**: Protecting our component from try to render while the data is loading, **Time: 03:36**
+- **Lecture 5**: Display the NFTs in the carousel, **Time: 04:29**
+- **Lecture 6**: Configuring the carousel to display the NFTs correctly, **Time: 04:59**
+
+## Section 2: Display NFT details and actions
+**Total Time: 1:03:49**
+- **Lecture 7**: Displaying the NFT durability, **Time: 07:40**
+- **Lecture 8**: Add a claim and a fix button for the tool, **Time: 06:29**
+- **Lecture 9**: Parsing the values of gold and energy the user has, **Time: 05:45**
+- **Lecture 10**: Disable the claim button when we not able to claim a tool, **Time: 05:58**
+- **Lecture 11**: Disable the fix button when we not able to fix a tool, **Time: 03:13**
+- **Lecture 12**: Dispatching the claim action from our component, **Time: 04:08**
+- **Lecture 13**: Creating a new action for NFT actions, **Time: 09:46**
+- **Lecture 14**: Creating a saga to claim the NFT, **Time: 06:43**
+- **Lecture 15**: Create the WAX service to send the claimnft action, **Time: 07:44**
+- **Lecture 16**: Integrate the claimNft action to our saga, **Time: 06:43**
+
+## Section 3: Small improvements on the game UI/UX
+**Total Time: 09:14**
+- **Lecture 17**: Fixing the date time problem with the claim button, **Time: 05:03**
+- **Lecture 18**: Reloading user and tools data after claiming the tool, **Time: 04:11**
+
+---
