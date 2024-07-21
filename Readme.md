@@ -26,9 +26,9 @@
 
 | Course Curriculum | Course Url  | Final Url |
 |:------------------|:------------------|:---------:|
-| [Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 1](./Course%20Curriculum%20-%20Front%20End.md#course-wax-blockchain-game-front-end-with-react-redux--saga-part-1) | [https://www.udemy.com/course/wax-blockchain-game](https://www.udemy.com/course/wax-blockchain-game/?referralCode=92F6894E02732FF28505) | ✅ |
-| [Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 2](./Course%20Curriculum%20-%20Front%20End.md#course-wax-blockchain-game-front-end-with-react-redux--saga-part-2) |  [https://www.udemy.com/course/wax-blockchain-game-frontend](https://www.udemy.com/course/wax-blockchain-game-frontend/?referralCode=7E58AA79ECC240CCE59C) | ✅ |
-| [Course 3: WAX Blockchain Game Front-End with React, Redux & Saga Part 3]((./Course%20Curriculum%20-%20Front%20End.md#course-wax-blockchain-game-front-end-with-react-redux--saga-part-2)) | [https://www.udemy.com/course/blockchain-wax-development](https://www.udemy.com/course/draft/6080407/?referralCode=C99CC4A06F49419D7616) | ✅ |
+| [Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 1](./Course%20Curriculum%20-%20Front%20End.md#course-wax-blockchain-game-front-end-with-react-redux--saga-part-1) | [https://www.udemy.com/course/wax-blockchain-game](https://www.udemy.com/course/wax-blockchain-game-frontend/?referralCode=38D94187204667E1AA06) | ✅ |
+| [Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 2](./Course%20Curriculum%20-%20Front%20End.md#course-wax-blockchain-game-front-end-with-react-redux--saga-part-2) |  [https://www.udemy.com/course/wax-blockchain-game-frontend](https://www.udemy.com/course/wax-blockchain-game/?referralCode=27EE60E7C871665626D3) | ✅ |
+| [Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 3](./Course%20Curriculum%20-%20Front%20End.md#course-wax-blockchain-game-front-end-with-react-redux--saga-part-3) | [https://www.udemy.com/course/wax-blockchain-react](https://www.udemy.com/coursewax-blockchain-react/?referralCode=C99CC4A06F49419D7616) | ✅ |
 
 
 (⭐⭐⭐⭐⭐ please do not forget to review the code after watch it, any recomendations can be made via discord ⭐⭐⭐⭐⭐)

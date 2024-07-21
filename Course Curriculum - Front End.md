@@ -91,7 +91,6 @@
 
 ---
 
-
 # Course: WAX Blockchain Game Front-End with React, Redux & Saga Part 3
 
 **Total Course Time: 1:41:53**
